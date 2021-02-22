@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paragraph Checker</title>
+</head>
+<body>
+	<form action="." method="POST">
+		{% csrf_token %}
+		<input type="text" name="word" />
+		<input type="submit" name="Add" />
+		<br /><br /><br />
+		<textarea id="pgraph" rows="5" cols="50" oninput="verify()"></textarea>
+		<br />
+		<input type="button" name="check" id="check" value="Check" />
+		<input type="hidden" name="words" id="words" value="{{ words }}" />
+		<div id="p-text" style="white-space: pre-wrap;"></div>
+	</form>
+	
+
+
+	<script type="text/javascript">
+
+		
+		function verify()
+		{
+			let words = document.getElementById("words")
+			let p_text = document.getElementById('p-text')
+			let paragraph = document.getElementById('pgraph')
+			// p_text.innerHTML = paragraph.value
+
+			paragraph.onkeyup = function ()
+			{
+				val = this.value;
+				val = YourRegex(val);
+				(p_text).innerHTML = val;
+			}
+
+			function YourRegex(val)
+			{
+			    let word = JSON.parse(words.value).map(v => v.toLowerCase());
+		    	let words_list = val.split(/[ \n]/).map(v => v.toLowerCase());
+  			    // console.log(word);
+		    	let filtered_value = word.filter(value => words_list.includes(value));
+		    	
+		    	
+		    	var re = new RegExp(filtered_value ,"gi");
+		    	// console.log(re);
+		    			    	
+		    	var val = val.split(" ");
+		    	val.forEach(abc);
+
+		    	function abc(item, index)
+		    	{
+		    		// console.log(item, index);
+		    		item.replace(re, function(x)
+			    	{
+			    		val[index] = x.toUpperCase();
+			    	});
+			    	// console.log(val);
+			    	// return val[index] = item.replace(re, item);
+		    	}
+		    	var ans = val.join(" ")
+		    	console.log(ans);
+		    	// return "<span>" + ans + "</span>";
+		    	return ans;
+			}
+
+		}
+	</script>
+</body>
+</html>

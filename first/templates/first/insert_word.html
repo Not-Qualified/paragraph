@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w-50">
+	<br /><br />
+	{% include 'links.html' %}
+	<br /><br />
+	<form action="." method="POST">
+		{% csrf_token %}
+		<input tabindex="1" minlength="3" type="text" name="word" autofocus />
+		<br /><br />
+		<input type="submit" name="Add" value="Add Skill" class="btn btn-primary" />
+		<br />
+	</form>
+	<br /><br /><br />
+	<div class="">
+	{% for word in words %}
+			<button class="btn btn-default">{{ word }}</button>
+	{% endfor %}
+	</div>
+</div>
+{% endblock content %}

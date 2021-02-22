@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style type="text/css">
+	mark
+	{
+		background: #98ffa7;
+		/*color: yellow;*/
+	}
+	#p-text
+	{
+		line-height: 3;
+		padding: 10px 0;
+	}
+	#pgraph
+	{
+		padding: 10px;
+		border-radius: 5px;
+		width: 100%;
+	}
+</style>
+{% endblock head %}
+
+{% block content %}
+<div class="w-50">
+	<br /><br />
+	{% include 'links.html' %}
+	<br /><br />
+	<form action="." method="POST">
+		<textarea placeholder="Enter Text Here to Check" id="pgraph" rows="5"  oninput="verify()" autofocus ></textarea>
+		<!-- <input type="button" name="check" id="check" value="Check" /> -->
+		<input type="hidden" name="words" id="words" value="{{ words }}" />
+
+		<div id="p-text" style="white-space: pre-wrap;"></div>
+	</form>
+</div>
+
+	<script type="text/javascript">
+
+		
+		function verify()
+		{
+			let words = document.getElementById("words")
+			let p_text = document.getElementById('p-text')
+			let paragraph = document.getElementById('pgraph')
+
+			paragraph.onkeyup = function ()
+			{
+				val = this.value;
+
+				val = YourRegex(val);
+				(p_text).innerHTML = val;
+			}
+
+			function YourRegex(val)
+			{
+			    let word = JSON.parse(words.value).map(v => v.toLowerCase());
+		    	// let words_list = val.split(/[ \n]/).map(v => v.toLowerCase());
+  			    // console.log(word);
+		    	// let filtered_value = word.filter(value => words_list.includes(value));
+		    	
+		    	
+		    	var re = new RegExp(word.join("|") ,"gi");
+		    			    	
+		    	var val = val.split(" ");
+		    	val.forEach(abc);
+
+		    	function abc(item, index)
+		    	{
+		    		item.replace(re, function(x)
+			    	{
+			    		val[index] = "<mark>" + x.toUpperCase() + "</mark>";
+			    	});
+		    	}
+
+		    	return "<span>" + val.join(" ") + "</span>";
+			}
+
+		}
+	</script>
+{% endblock content %}
