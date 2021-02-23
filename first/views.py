@@ -32,5 +32,5 @@ def paragraph_check(request, *args, **kwargs):
 	context = {
 		"words": json.dumps(lines),
 	}
-	print(json.dumps(lines))
+	
 	return render(request, "first/paragraph.html", context)

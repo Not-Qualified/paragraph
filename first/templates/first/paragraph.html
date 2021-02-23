@@ -47,18 +47,16 @@
 			paragraph.onkeyup = function ()
 			{
 				val = this.value;
-
 				val = YourRegex(val);
 				(p_text).innerHTML = val;
 			}
 
 			function YourRegex(val)
 			{
-			    let word = JSON.parse(words.value).map(v => v.toLowerCase());
+			    let word = JSON.parse(words.value).map(v => "\\b" + v.toLowerCase() + "\\b");
 		    	// let words_list = val.split(/[ \n]/).map(v => v.toLowerCase());
   			    // console.log(word);
 		    	// let filtered_value = word.filter(value => words_list.includes(value));
-		    	
 		    	
 		    	var re = new RegExp(word.join("|") ,"gi");
 		    			    	
@@ -73,7 +71,8 @@
 			    	});
 		    	}
 
-		    	return "<span>" + val.join(" ") + "</span>";
+		    	// return "<span>" + val.join(" ") + "</span>";
+		    	return val.join(" ")
 			}
 
 		}

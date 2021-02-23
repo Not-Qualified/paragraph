@@ -2,14 +2,14 @@
 {% url "paragraph_check" as paragraph_check %}
 
 
-{% if request.path == insert_words %}
-	<span>Add Skills</span>
-{% else %}
-	<a class="btn btn-link" title="Go to Add Skill Page" href="{% url 'insert_words' %}"> Add Skills </a>
-{% endif %}
-
 {% if request.path == paragraph_check %}
 	<span> Paragraph Check </span>
 {% else %}
 	<a class="btn btn-link" title="Go to Paragraph Check Page" href="{% url 'paragraph_check' %}"> Paragraph Check </a>
+{% endif %}
+
+{% if request.path == insert_words %}
+	<span>Add Skills</span>
+{% else %}
+	<a class="btn btn-link" title="Go to Add Skill Page" href="{% url 'insert_words' %}"> Add Skills </a>
 {% endif %}
